@@ -20,17 +20,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 先裝 pnpm（在 setup-node 之前）
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "pnpm"
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
+      - run: corepack enable
+
+      - run: pnpm -v
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build                 # 會輸出到 out/
+      - run: pnpm build
+      - run: touch out/.nojekyll
 
       - uses: actions/upload-pages-artifact@v3
         with:
