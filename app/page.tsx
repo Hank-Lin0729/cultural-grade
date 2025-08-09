@@ -606,12 +606,13 @@ return (
                   <div className="flex flex-col md:flex-row items-center gap-6">
 <img
   src={
-    testimonials[currentTestimonial].image
-      || `${process.env.NEXT_PUBLIC_BASE_PATH}/placeholder.svg?height=96&width=96`
+    testimonials[currentTestimonial]?.image
+      || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/placeholder.svg?height=96&width=96`
   }
-  alt={testimonials[currentTestimonial].name}
+  alt={testimonials[currentTestimonial]?.name || 'Testimonial'}
   className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-amber-400 animate-pulse-slow"
 />
+
 
 
                     <div className="flex-1 text-center md:text-left">
