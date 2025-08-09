@@ -1,0 +1,806 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+/* 文化風格字體 - 添加手寫感字體 */
+@font-face {
+  font-family: 'Iansui';
+  src: url('/fonts/Iansui-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 文化風格字體 - 使用系統字體 */
+.font-cultural {
+  font-family: 'Iansui', 'Times New Roman', '新細明體', serif;
+}
+
+.font-handwriting {
+  font-family: 'Iansui', '標楷體', 'DFKai-SB', serif;
+  font-weight: 400;
+}
+
+/* 文化漸層背景 */
+.cultural-gradient {
+  background: linear-gradient(135deg, #991b1b 0%, #dc2626 25%, #ea580c 50%, #d97706 75%, #ca8a04 100%);
+}
+
+/* 文化風格背景動畫 - 替換原有的wave-bg */
+.wave-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  animation: cultural-float 15s ease-in-out infinite;
+}
+
+.wave-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.03) 50%, transparent 60%),
+    linear-gradient(-45deg, transparent 40%, rgba(255, 255, 255, 0.02) 50%, transparent 60%);
+  background-size: 60px 60px, 80px 80px;
+  animation: cultural-pattern 20s linear infinite;
+}
+
+/* 新的動畫關鍵幀 */
+@keyframes cultural-float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(-10px) rotate(1deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-5px) rotate(-1deg);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateY(-15px) rotate(0.5deg);
+    opacity: 0.7;
+  }
+}
+
+@keyframes cultural-pattern {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 60px 60px, -80px 80px;
+  }
+}
+
+/* 替代方案：傳統文化紋樣動畫 */
+.traditional-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.traditional-bg::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    repeating-conic-gradient(
+      from 0deg at 50% 50%,
+      transparent 0deg,
+      rgba(255, 255, 255, 0.03) 15deg,
+      transparent 30deg,
+      rgba(255, 255, 255, 0.02) 45deg,
+      transparent 60deg
+    );
+  animation: traditional-rotate 30s linear infinite;
+}
+
+@keyframes traditional-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 雲紋動畫效果 */
+.cloud-pattern-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.cloud-pattern-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(ellipse 100px 50px at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 80px 40px at 75% 75%, rgba(255, 255, 255, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 120px 60px at 50% 10%, rgba(255, 255, 255, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 90px 45px at 10% 90%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  animation: cloud-drift 25s ease-in-out infinite;
+}
+
+@keyframes cloud-drift {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(20px) translateY(-10px);
+  }
+  50% {
+    transform: translateX(-10px) translateY(15px);
+  }
+  75% {
+    transform: translateX(15px) translateY(-5px);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    transform: translate3d(0, -10px, 0);
+  }
+  70% {
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    transform: translate3d(0, -5px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 打字機效果 */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #f59e0b; }
+}
+
+.typewriter {
+  overflow: hidden;
+  border-right: 3px solid #f59e0b;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: 0.1em;
+  animation: 
+    typing 2s steps(40, end),
+    blink-caret 0.75s step-end infinite;
+}
+
+/* 應用動畫類別 */
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out;
+  animation-fill-mode: both;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.8s ease-out;
+  animation-fill-mode: both;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-in;
+}
+
+/* 滾動觸發動畫 */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.scroll-animate.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 懸停效果 */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 專業按鈕樣式 */
+.professional-btn {
+  @apply bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 font-semibold shadow-lg hover:shadow-xl transition-all duration-300;
+}
+
+.professional-btn-outline {
+  @apply border-2 border-amber-500 text-amber-700 hover:bg-amber-500 hover:text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300;
+}
+
+/* 聯絡表單樣式 */
+.contact-form-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.contact-form-item:nth-child(1) { animation-delay: 0s; }
+.contact-form-item:nth-child(2) { animation-delay: 0.1s; }
+.contact-form-item:nth-child(3) { animation-delay: 0.2s; }
+.contact-form-item:nth-child(4) { animation-delay: 0.3s; }
+.contact-form-item:nth-child(5) { animation-delay: 0.4s; }
+
+/* 文化風格卡片 */
+.cultural-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.cultural-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #dc2626, #ea580c, #d97706, #ca8a04);
+}
+
+/* 響應式設計增強 */
+@media (max-width: 640px) {
+  .animate-fade-in-up {
+    animation-duration: 0.8s;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+  
+  .scroll-animate {
+    transform: translateY(30px);
+  }
+}
+
+/* 特殊效果 */
+.gradient-text {
+  background: linear-gradient(135deg, #dc2626, #ea580c, #d97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 邊框動畫 */
+.animated-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.animated-border:hover::before {
+  left: 100%;
+}
+
+/* 滑入動畫 */
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* 增強的浮動動畫 */
+@keyframes enhanced-float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-20px) rotate(0.5deg);
+  }
+}
+
+.animate-enhanced-float {
+  animation: enhanced-float 4s ease-in-out infinite;
+}
+
+/* 脈衝發光效果 */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.6), 0 0 40px rgba(251, 191, 36, 0.3);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* 旋轉縮放動畫 */
+@keyframes rotate-scale {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.animate-rotate-scale {
+  animation: rotate-scale 3s ease-in-out infinite;
+}
+
+/* 波紋效果 */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple 0.6s linear;
+}
+
+/* 文字打字效果增強 */
+@keyframes enhanced-typing {
+  from { 
+    width: 0;
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  to { 
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+.animate-enhanced-typing {
+  overflow: hidden;
+  border-right: 3px solid #f59e0b;
+  white-space: nowrap;
+  animation: enhanced-typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+/* 彈跳進入動畫 */
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-100px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateY(0);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.8s ease-out forwards;
+}
+
+/* 漸變背景動畫 */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* 3D翻轉效果 */
+@keyframes flip-3d {
+  0% {
+    transform: perspective(400px) rotateY(0);
+  }
+  100% {
+    transform: perspective(400px) rotateY(360deg);
+  }
+}
+
+.animate-flip-3d {
+  animation: flip-3d 2s ease-in-out infinite;
+}
+
+/* 呼吸燈效果 */
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+.animate-breathe {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+/* Burger選單專用動畫 */
+@keyframes menu-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes menu-fade-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes menu-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cultural-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(251, 191, 36, 0.6), 0 0 60px rgba(220, 38, 38, 0.3);
+  }
+}
+
+@keyframes ink-brush {
+  0% {
+    transform: translateX(-100%) rotate(-5deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes paper-unfold {
+  0% {
+    transform: rotateY(-90deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+/* 文化風格選單項目 */
+.cultural-menu-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.cultural-menu-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.cultural-menu-item:hover::before {
+  left: 100%;
+}
+
+/* 毛筆字效果 */
+.brush-text {
+  position: relative;
+  display: inline-block;
+}
+
+.brush-text::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #dc2626, #f59e0b);
+  transition: width 0.8s ease;
+}
+
+.brush-text:hover::after {
+  width: 100%;
+}
+
+/* 文化裝飾邊框 */
+.cultural-border {
+  position: relative;
+}
+
+.cultural-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #dc2626, #f59e0b, #dc2626, #f59e0b);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cultural-border:hover::before {
+  opacity: 1;
+}
+
+/* 應用動畫類別 */
+.animate-menu-fade-in {
+  animation: menu-fade-in 0.8s ease-out forwards;
+}
+
+.animate-menu-fade-out {
+  animation: menu-fade-out 0.5s ease-in forwards;
+}
+
+.animate-menu-slide-in {
+  animation: menu-slide-in 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-cultural-glow {
+  animation: cultural-glow 3s ease-in-out infinite;
+}
+
+.animate-ink-brush {
+  animation: ink-brush 1s ease-out forwards;
+}
+
+.animate-paper-unfold {
+  animation: paper-unfold 0.8s ease-out forwards;
+}
+
+/* 文化風格背景動畫增強 */
+.cultural-menu-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.cultural-menu-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(220, 38, 38, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(234, 88, 12, 0.08) 0%, transparent 50%);
+  animation: cultural-float 20s ease-in-out infinite;
+}
+
+.cultural-menu-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.02) 50%, transparent 60%),
+    linear-gradient(-45deg, transparent 40%, rgba(255, 255, 255, 0.01) 50%, transparent 60%);
+  background-size: 80px 80px, 100px 100px;
+  animation: cultural-pattern 25s linear infinite;
+}
