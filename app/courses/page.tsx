@@ -8,6 +8,8 @@ import { Progress } from '@/components/ui/progress'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { BookOpen, Play, Clock, Users, Star, ArrowLeft, Download, FileText, Video } from 'lucide-react'
 import Link from 'next/link'
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
 
 export default function CoursesPage() {
   const [selectedCategory, setSelectedCategory] = useState('all')
@@ -207,11 +209,12 @@ export default function CoursesPage() {
           {filteredCourses.map((course) => (
             <Card key={course.id} className="border-2 border-amber-200 hover:border-amber-400 transition-all duration-300 hover:shadow-lg group">
               <div className="relative">
-                <img 
-                  src={course.thumbnail || "/placeholder.svg"}
-                  alt={course.title}
-                  className="w-full h-48 object-cover rounded-t-lg"
-                />
+<img 
+  src={course.thumbnail || `${publicRuntimeConfig.basePath}/placeholder.svg`}
+  alt={course.title}
+  className="w-full h-48 object-cover rounded-t-lg"
+/>
+
                 <div className="absolute top-3 left-3">
                   <Badge className={getStatusColor(course.status)}>
                     {course.status}

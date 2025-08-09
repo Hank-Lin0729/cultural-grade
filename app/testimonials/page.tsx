@@ -6,7 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Star, ArrowLeft, ChevronLeft, ChevronRight, Quote, Award, Users, TrendingUp, Menu, X, MessageCircle, Phone } from 'lucide-react'
 import Link from 'next/link'
-
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
 export default function TestimonialsPage() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const [selectedCategory, setSelectedCategory] = useState('all')
@@ -459,11 +460,14 @@ export default function TestimonialsPage() {
                   <CardContent className="p-6 md:p-8">
                     <div className="flex flex-col lg:flex-row items-center gap-6 md:gap-8">
                       <div className="flex-shrink-0">
-                        <img 
-                          src={filteredTestimonials[currentTestimonial]?.image || "/placeholder.svg"}
-                          alt={filteredTestimonials[currentTestimonial]?.name}
-                          className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-amber-400 animate-pulse-slow"
-                        />
+<img 
+  src={
+    filteredTestimonials[currentTestimonial]?.image 
+      || `${publicRuntimeConfig.basePath}/placeholder.svg`
+  }
+  alt={filteredTestimonials[currentTestimonial]?.name || "Testimonial"}
+  className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-amber-400 animate-pulse-slow"
+/>
                       </div>
                       <div className="flex-1 text-center lg:text-left">
                         <div className="flex justify-center lg:justify-start mb-4">
@@ -543,11 +547,14 @@ export default function TestimonialsPage() {
             {filteredTestimonials.map((testimonial, index) => (
               <Card key={index} className="border-0 shadow-lg hover-lift scroll-animate" style={{animationDelay: `${index * 0.1}s`}}>
                 <CardHeader className="text-center">
-                  <img 
-                    src={testimonial.image || "/placeholder.svg"}
-                    alt={testimonial.name}
-                    className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-4 border-amber-400 mx-auto mb-4"
-                  />
+<img 
+  src={
+    testimonial.image 
+      || `${publicRuntimeConfig.basePath}/placeholder.svg`
+  }
+  alt={testimonial.name || "Testimonial"}
+  className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-4 border-amber-400 mx-auto mb-4"
+/>
                   <div className="flex justify-center mb-2">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="w-3 h-3 md:w-4 md:h-4 fill-amber-400 text-amber-400" />

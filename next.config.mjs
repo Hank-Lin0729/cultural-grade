@@ -15,6 +15,10 @@ const nextConfig = {
     basePath: `/${repo}`,
     assetPrefix: `/${repo}/`,
     trailingSlash: true,
+
+    publicRuntimeConfig: {
+        basePath: `/${repo}`,
+    },
 }
 
 export default nextConfig

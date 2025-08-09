@@ -9,7 +9,8 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { MapPin, Users, Award, BookOpen, Star, ChevronLeft, ChevronRight, Menu, X, Home, GraduationCap, BadgeIcon as Certificate, MessageCircle, Phone, Mail, MapPinIcon, Send, Facebook, Instagram, MessageSquare, Clock, User } from 'lucide-react'
 import Link from 'next/link'
-
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
 export default function HomePage() {
 const [currentTestimonial, setCurrentTestimonial] = useState(0)
 const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -603,11 +604,15 @@ return (
               <Card className="border-0 shadow-2xl hover-lift">
                 <CardContent className="p-6 md:p-8">
                   <div className="flex flex-col md:flex-row items-center gap-6">
-                    <img 
-                      src={testimonials[currentTestimonial].image || "/placeholder.svg?height=96&width=96"}
-                      alt={testimonials[currentTestimonial].name}
-                      className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-amber-400 animate-pulse-slow"
-                    />
+<img
+  src={
+    testimonials[currentTestimonial].image
+      || `${publicRuntimeConfig.basePath}/placeholder.svg?height=96&width=96`
+  }
+  alt={testimonials[currentTestimonial].name}
+  className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-amber-400 animate-pulse-slow"
+/>
+
                     <div className="flex-1 text-center md:text-left">
                       <div className="flex justify-center md:justify-start mb-3">
                         {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
