@@ -1,24 +1,16 @@
 /** @type {import('next').NextConfig} */
 const repo = 'cultural-grade'
 
-const nextConfig = {
-    eslint: {
-        ignoreDuringBuilds: true,
-    },
-    typescript: {
-        ignoreBuildErrors: true,
-    },
-    images: {
-        unoptimized: true,
-    },
-    output: 'export',
-    basePath: `/${repo}`,
-    assetPrefix: `/${repo}/`,
-    trailingSlash: true,
+const isProd = process.env.NODE_ENV === 'production'
 
-    publicRuntimeConfig: {
-        basePath: `/${repo}`,
-    },
+const nextConfig = {
+    eslint: { ignoreDuringBuilds: true },
+    typescript: { ignoreBuildErrors: true },
+    images: { unoptimized: true },
+    output: 'export',
+    basePath: isProd ? `/${repo}` : '',
+    assetPrefix: isProd ? `/${repo}/` : '',
+    trailingSlash: true,
 }
 
 export default nextConfig

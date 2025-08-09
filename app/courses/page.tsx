@@ -209,11 +209,11 @@ export default function CoursesPage() {
           {filteredCourses.map((course) => (
             <Card key={course.id} className="border-2 border-amber-200 hover:border-amber-400 transition-all duration-300 hover:shadow-lg group">
               <div className="relative">
-<img 
-  src={course.thumbnail || `${publicRuntimeConfig.basePath}/placeholder.svg`}
-  alt={course.title}
-  className="w-full h-48 object-cover rounded-t-lg"
-/>
+    <img 
+      src={course.thumbnail || `${publicRuntimeConfig.basePath}/placeholder.svg`}
+      alt={course.title}
+      className="w-full h-48 object-cover rounded-t-lg"
+    />
 
                 <div className="absolute top-3 left-3">
                   <Badge className={getStatusColor(course.status)}>

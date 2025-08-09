@@ -607,11 +607,12 @@ return (
 <img
   src={
     testimonials[currentTestimonial].image
-      || `${publicRuntimeConfig.basePath}/placeholder.svg?height=96&width=96`
+      || `${process.env.NEXT_PUBLIC_BASE_PATH}/placeholder.svg?height=96&width=96`
   }
   alt={testimonials[currentTestimonial].name}
   className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-4 border-amber-400 animate-pulse-slow"
 />
+
 
                     <div className="flex-1 text-center md:text-left">
                       <div className="flex justify-center md:justify-start mb-3">
